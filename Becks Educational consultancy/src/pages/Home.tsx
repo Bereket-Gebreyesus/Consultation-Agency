@@ -1,117 +1,299 @@
-import { Box, Container, Typography, Grid, Card, CardContent, Button } from '@mui/material';
-import { motion } from 'framer-motion';
-import SchoolIcon from '@mui/icons-material/School';
-import LanguageIcon from '@mui/icons-material/Language';
-import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import {
+  Box,
+  Button,
+  Container,
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+} from '@mui/material';
+import Testimonials from '../components/Testimonials';
+import CountryServices from '../components/CountryServices';
 
-const MotionBox = motion(Box);
+const Home: React.FC = () => {
+  const [openContact, setOpenContact] = useState(false);
 
-const Home = () => {
-  const features = [
-    {
-      icon: <SchoolIcon sx={{ fontSize: 40 }} />,
-      title: 'Expert Guidance',
-      description: 'Professional counseling for your educational journey abroad',
-    },
-    {
-      icon: <LanguageIcon sx={{ fontSize: 40 }} />,
-      title: 'Global Opportunities',
-      description: 'Access to top universities and colleges worldwide',
-    },
-    {
-      icon: <SupportAgentIcon sx={{ fontSize: 40 }} />,
-      title: '24/7 Support',
-      description: 'Round-the-clock assistance for all your queries',
-    },
-  ];
+  const handleOpenContact = () => {
+    setOpenContact(true);
+  };
+
+  const handleCloseContact = () => {
+    setOpenContact(false);
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Handle form submission
+  };
 
   return (
-    <Box>
-      {/* Hero Section */}
+    <Box sx={{ backgroundColor: '#0a1929' }}>
+      {/* Hero Section with Video Background */}
       <Box
         sx={{
-          bgcolor: 'primary.main',
-          color: 'white',
-          py: { xs: 6, md: 8 },
           position: 'relative',
+          height: '80vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
           overflow: 'hidden',
         }}
       >
-        <Container maxWidth="lg">
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <MotionBox
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Typography variant="h2" component="h1" gutterBottom>
-                  Your Gateway to Global Education
-                </Typography>
-                <Typography variant="h5" paragraph>
-                  We help students achieve their dreams of studying abroad with expert guidance and support.
-                </Typography>
-                <Button
-                  component={RouterLink}
-                  to="/contact"
-                  variant="contained"
-                  color="secondary"
-                  size="large"
-                  sx={{ mt: 2 }}
-                >
-                  Get Started
-                </Button>
-              </MotionBox>
-            </Grid>
-          </Grid>
+        <video
+          autoPlay
+          muted
+          loop
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+          }}
+        >
+          <source src="/videos/education-background.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Overlay */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'linear-gradient(45deg, rgba(10, 25, 41, 0.9) 0%, rgba(26, 35, 126, 0.9) 100%)',
+            zIndex: 0,
+          }}
+        />
+
+        {/* Content */}
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          <Typography
+            variant="h1"
+            component="h1"
+            sx={{
+              fontWeight: 700,
+              mb: 3,
+              fontSize: { xs: '2.5rem', md: '4rem' },
+              color: '#ffffff',
+            }}
+          >
+            Your Gateway to Global Education
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              mb: 4,
+              maxWidth: '800px',
+              mx: 'auto',
+              color: 'rgba(255, 255, 255, 0.8)',
+            }}
+          >
+            We help students achieve their dreams of studying abroad with expert guidance and support.
+          </Typography>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={handleOpenContact}
+            sx={{
+              backgroundColor: '#1a237e',
+              '&:hover': {
+                backgroundColor: '#0d47a1',
+              },
+              px: 4,
+              py: 1.5,
+            }}
+          >
+            Get Started
+          </Button>
         </Container>
+
+        {/* Floating Contact Button */}
+        <Box
+          sx={{
+            position: 'fixed',
+            right: 20,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            zIndex: 1000,
+          }}
+        >
+          <Button
+            variant="contained"
+            onClick={handleOpenContact}
+            sx={{
+              backgroundColor: '#1a237e',
+              borderRadius: '50%',
+              width: 60,
+              height: 60,
+              minWidth: 60,
+              '&:hover': {
+                backgroundColor: '#0d47a1',
+              },
+            }}
+          >
+            <Typography variant="h6">📞</Typography>
+          </Button>
+        </Box>
       </Box>
 
-      {/* Features Section */}
-      <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
-        <Typography variant="h3" component="h2" textAlign="center" gutterBottom>
-          Why Choose Us
-        </Typography>
-        <Grid container spacing={4} sx={{ mt: 4 }}>
-          {features.map((feature, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <MotionBox
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-              >
-                <Card
-                  sx={{
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    p: 2,
-                    transition: 'transform 0.2s',
-                    '&:hover': {
-                      transform: 'translateY(-8px)',
-                    },
-                  }}
-                >
-                  <Box sx={{ color: 'primary.main', mb: 2 }}>
-                    {feature.icon}
-                  </Box>
-                  <CardContent>
-                    <Typography variant="h5" component="h3" gutterBottom>
-                      {feature.title}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      {feature.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </MotionBox>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+      {/* Country Services Section */}
+      <Box sx={{ backgroundColor: '#0a1929', py: { xs: 6, md: 8 } }}>
+        <CountryServices />
+      </Box>
+
+      {/* Testimonials Section */}
+      <Box sx={{ backgroundColor: '#0a1929', py: { xs: 6, md: 8 } }}>
+        <Testimonials />
+      </Box>
+
+      {/* Contact Dialog */}
+      <Dialog
+        open={openContact}
+        onClose={handleCloseContact}
+        maxWidth="sm"
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: '#0a1929',
+            color: '#ffffff',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+          },
+        }}
+      >
+        <DialogTitle sx={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)', pb: 2 }}>
+          Contact Us
+        </DialogTitle>
+        <DialogContent sx={{ pt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <TextField
+              fullWidth
+              label="Name"
+              variant="outlined"
+              required
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: '#ffffff',
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#ffffff',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#ffffff',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#ffffff',
+                },
+              }}
+            />
+            <TextField
+              fullWidth
+              label="Email"
+              type="email"
+              variant="outlined"
+              required
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: '#ffffff',
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#ffffff',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#ffffff',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#ffffff',
+                },
+              }}
+            />
+            <TextField
+              fullWidth
+              label="Phone"
+              variant="outlined"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: '#ffffff',
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#ffffff',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#ffffff',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#ffffff',
+                },
+              }}
+            />
+            <TextField
+              fullWidth
+              label="Message"
+              multiline
+              rows={4}
+              variant="outlined"
+              required
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: '#ffffff',
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#ffffff',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#ffffff',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#ffffff',
+                },
+              }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                mt: 2,
+                backgroundColor: '#1a237e',
+                color: '#ffffff',
+                '&:hover': {
+                  backgroundColor: '#0d47a1',
+                },
+              }}
+            >
+              Send Message
+            </Button>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };
