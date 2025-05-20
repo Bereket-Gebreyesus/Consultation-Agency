@@ -41,9 +41,9 @@ const countries = [
     ],
   },
   {
-    id: 'canada',
-    name: 'Canada',
-    image: '/images/canada-education.jpg',
+    id: 'Poland',
+    name: 'Poland',
+    image: '/images/poland-flag-png-large.png',
     description: 'High-quality education with post-study work opportunities.',
     services: [
       'Study Permit Application',
@@ -53,9 +53,9 @@ const countries = [
     ],
   },
   {
-    id: 'australia',
-    name: 'Australia',
-    image: '/images/australia-education.jpg',
+    id: 'Romania',
+    name: 'Romania',
+    image: '/images/romania-flag-png-large.png',
     description: 'Innovative education system with great lifestyle.',
     services: [
       'Student Visa (Subclass 500) Application',

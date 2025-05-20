@@ -9,12 +9,19 @@ import {
   CardContent,
   Snackbar,
   Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  IconButton,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import CloseIcon from '@mui/icons-material/Close';
+import SendIcon from '@mui/icons-material/Send';
 
 const MotionBox = motion(Box);
 
@@ -26,6 +33,7 @@ const Contact = () => {
     message: '',
   });
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' as 'success' | 'error' });
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,14 +41,17 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle the form submission
     setSnackbar({
       open: true,
       message: 'Thank you for your message. We will get back to you soon!',
       severity: 'success',
     });
     setFormData({ name: '', email: '', subject: '', message: '' });
+    setOpenDialog(false);
   };
+
+  const handleOpenDialog = () => setOpenDialog(true);
+  const handleCloseDialog = () => setOpenDialog(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -96,6 +107,29 @@ const Contact = () => {
           >
             Have questions about studying abroad? We're here to help you achieve your educational goals.
           </Typography>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={handleOpenDialog}
+            startIcon={<SendIcon />}
+            sx={{
+              backgroundColor: '#1a237e',
+              color: '#ffffff',
+              borderRadius: 2,
+              px: 4,
+              py: 1.5,
+              textTransform: 'none',
+              fontSize: '1.1rem',
+              fontWeight: 600,
+              boxShadow: '0 4px 12px rgba(26, 35, 126, 0.2)',
+              '&:hover': {
+                backgroundColor: '#0d47a1',
+                boxShadow: '0 6px 16px rgba(26, 35, 126, 0.3)',
+              },
+            }}
+          >
+            Contact Us
+          </Button>
         </MotionBox>
 
         <MotionBox
@@ -249,6 +283,7 @@ const Contact = () => {
                       type="submit"
                       variant="contained"
                       size="large"
+                      startIcon={<SendIcon />}
                       sx={{
                         backgroundColor: '#1a237e',
                         color: '#ffffff',
@@ -390,6 +425,192 @@ const Contact = () => {
           </MotionBox>
         </MotionBox>
       </Container>
+
+      {/* Contact Dialog */}
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        maxWidth="sm"
+        fullWidth
+        PaperProps={{
+          sx: {
+            borderRadius: 4,
+            backgroundColor: '#ffffff',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+          },
+        }}
+      >
+        <DialogTitle sx={{ p: 3, pb: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Typography variant="h5" sx={{ color: '#1a237e', fontWeight: 600 }}>
+              Contact Us
+            </Typography>
+            <IconButton
+              onClick={handleCloseDialog}
+              sx={{
+                color: '#1a237e',
+                '&:hover': {
+                  backgroundColor: 'rgba(26, 35, 126, 0.1)',
+                },
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
+        </DialogTitle>
+        <DialogContent sx={{ p: 3, pt: 0 }}>
+          <form onSubmit={handleSubmit}>
+            <Box sx={{ display: 'grid', gap: 3 }}>
+              <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 3 }}>
+                <TextField
+                  fullWidth
+                  label="Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: 2,
+                      '& fieldset': {
+                        borderColor: 'rgba(26, 35, 126, 0.2)',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#1a237e',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#1a237e',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: 'rgba(26, 35, 126, 0.7)',
+                      '&.Mui-focused': {
+                        color: '#1a237e',
+                      },
+                    },
+                  }}
+                />
+                <TextField
+                  fullWidth
+                  label="Email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: 2,
+                      '& fieldset': {
+                        borderColor: 'rgba(26, 35, 126, 0.2)',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#1a237e',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#1a237e',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: 'rgba(26, 35, 126, 0.7)',
+                      '&.Mui-focused': {
+                        color: '#1a237e',
+                      },
+                    },
+                  }}
+                />
+              </Box>
+              <TextField
+                fullWidth
+                label="Subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: 2,
+                    '& fieldset': {
+                      borderColor: 'rgba(26, 35, 126, 0.2)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#1a237e',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1a237e',
+                    },
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: 'rgba(26, 35, 126, 0.7)',
+                    '&.Mui-focused': {
+                      color: '#1a237e',
+                    },
+                  },
+                }}
+              />
+              <TextField
+                fullWidth
+                label="Message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                multiline
+                rows={4}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: 2,
+                    '& fieldset': {
+                      borderColor: 'rgba(26, 35, 126, 0.2)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#1a237e',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1a237e',
+                    },
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: 'rgba(26, 35, 126, 0.7)',
+                    '&.Mui-focused': {
+                      color: '#1a237e',
+                    },
+                  },
+                }}
+              />
+            </Box>
+          </form>
+        </DialogContent>
+        <DialogActions sx={{ p: 3, pt: 0 }}>
+          <Button
+            onClick={handleCloseDialog}
+            sx={{
+              color: '#1a237e',
+              '&:hover': {
+                backgroundColor: 'rgba(26, 35, 126, 0.1)',
+              },
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            startIcon={<SendIcon />}
+            sx={{
+              backgroundColor: '#1a237e',
+              color: '#ffffff',
+              borderRadius: 2,
+              px: 3,
+              '&:hover': {
+                backgroundColor: '#0d47a1',
+              },
+            }}
+          >
+            Send Message
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Snackbar
         open={snackbar.open}
