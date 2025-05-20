@@ -346,7 +346,7 @@ const Contact = () => {
                         Our Location
                       </Typography>
                       <Typography variant="body1" sx={{ color: '#333333' }}>
-                        123 Education Street, Addis Ababa, Ethiopia
+                        Addis Ababa, Ethiopia
                       </Typography>
                     </Box>
                   </Box>

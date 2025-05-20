@@ -32,43 +32,43 @@ const stats = [
 
 const team = [
   {
-    name: 'Dr. Sarah Johnson',
+    name: 'Sarah Johnson',
     position: 'Founder & CEO',
-    image: '/images/pexels-thiago-oliveira-17038205.jpg',
+    image: '/images/pexels-divinetechygirl-1181686.jpg',
     bio: 'With over 15 years of experience in international education, Dr. Johnson leads our team with expertise.',
   },
   {
     name: 'Michael Chen',
     position: 'Head of Admissions',
-    image: '/images/team/michael.jpg',
+    image: '/images/default-profile.jpg',
     bio: 'Specializing in university admissions, Michael has helped hundreds of students secure spots at top institutions.',
   },
   {
-    name: 'Aisha Patel',
+    name: 'Patel',
     position: 'Student Success Manager',
-    image: '/images/team/aisha.jpg',
+    image: '/images/pexels-justin-shaifer-501272-1222271.jpg',
     bio: 'Dedicated to ensuring student success, Aisha provides comprehensive support throughout the application process.',
   },
 ];
 
 const galleryImages = [
   {
-    image: '/images/gallery/students.jpg',
+    image: '/images/pexels-10ar-2880979.jpg',
     title: 'Student Success Stories',
     description: 'Our students achieving their dreams at top universities worldwide',
   },
   {
-    image: '/images/gallery/office.jpg',
+    image: '/images/pexels-pixabay-221537.jpg',
     title: 'Modern Office',
     description: 'State-of-the-art facilities for personalized counseling',
   },
   {
-    image: '/images/gallery/workshop.jpg',
+    image: '/images/pexels-field-engineer-147254-442150.jpg',
     title: 'Workshop Sessions',
     description: 'Regular workshops and seminars for student development',
   },
   {
-    image: '/images/gallery/graduation.jpg',
+    image: '/images/pexels-rdne-7713351.jpg',
     title: 'Graduation Celebrations',
     description: 'Celebrating our students\' achievements and milestones',
   },

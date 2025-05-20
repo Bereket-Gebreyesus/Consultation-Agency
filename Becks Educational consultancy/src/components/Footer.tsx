@@ -25,8 +25,8 @@ const Footer = () => {
 
   const contactInfo = [
     { icon: <EmailIcon />, text: 'info@becksconsultancy.com' },
-    { icon: <PhoneIcon />, text: '+1 (555) 123-4567' },
-    { icon: <LocationOnIcon />, text: '123 Education Street, City, Country' },
+    { icon: <PhoneIcon />, text: '+251 911 123 456' },
+    { icon: <LocationOnIcon />, text: 'Addis Ababa, Ethiopia' },
   ];
 
   return (

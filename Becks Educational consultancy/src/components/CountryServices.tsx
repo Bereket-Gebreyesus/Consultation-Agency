@@ -11,6 +11,7 @@ import {
   FormControl,
   InputLabel,
 } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material';
 import { motion } from 'framer-motion';
 
 const MotionBox = motion(Box);
@@ -19,7 +20,7 @@ const countries = [
   {
     id: 'usa',
     name: 'United States',
-    image: '/images/usa-education.jpg',
+    image: '/images/usa.png',
     description: 'Top universities, diverse programs, and excellent research opportunities.',
     services: [
       'Student Visa (F-1) Application',
@@ -29,9 +30,9 @@ const countries = [
     ],
   },
   {
-    id: 'uk',
-    name: 'United Kingdom',
-    image: '/images/uk-education.jpg',
+    id: 'netherlands',
+    name: 'Netherlands',
+    image: '/images/netherlands-flag-png-large.png',
     description: 'World-renowned institutions with rich academic heritage.',
     services: [
       'Student Visa (Tier 4) Application',
