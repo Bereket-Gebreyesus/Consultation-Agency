@@ -17,7 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import Testimonials from '../components/Testimonials';
 import CountryServices from '../components/CountryServices';
-import { motion } from 'framer-motion';
+//import { motion } from 'framer-motion';
 //import SchoolIcon from '@mui/icons-material/School';
 //import LanguageIcon from '@mui/icons-material/Language';
 //import WorkIcon from '@mui/icons-material/Work';
@@ -26,7 +26,7 @@ import { motion } from 'framer-motion';
 //import Navbar from '../components/Navbar';
 //import Footer from '../components/Footer';
 
-const MotionBox = motion(Box);
+//const MotionBox = motion(Box);
 
 const Home: React.FC = () => {
   const [formData, setFormData] = useState({
