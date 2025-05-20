@@ -1,113 +1,224 @@
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import {
   AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
   Box,
-  useTheme,
-  useMediaQuery,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
   Container,
+  Button,
+  MenuItem,
+  Stack,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import SchoolIcon from '@mui/icons-material/School';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import { Link as RouterLink } from 'react-router-dom';
+
+const pages = [
+  { name: 'Home', path: '/', icon: <HomeIcon /> },
+  { name: 'About', path: '/about', icon: <InfoIcon /> },
+  { name: 'Services', path: '/services', icon: <SchoolIcon /> },
+  { name: 'Contact', path: '/contact', icon: <ContactMailIcon /> },
+];
 
 const Navbar = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
-  const menuItems = [
-    { text: 'Home', path: '/' },
-    { text: 'About', path: '/about' },
-    { text: 'Services', path: '/services' },
-    { text: 'Contact', path: '/contact' },
-  ];
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
   };
 
-  const drawer = (
-    <List>
-      {menuItems.map((item) => (
-        <ListItem
-          button
-          component={RouterLink}
-          to={item.path}
-          key={item.text}
-          onClick={handleDrawerToggle}
-        >
-          <ListItemText primary={item.text} />
-        </ListItem>
-      ))}
-    </List>
-  );
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
   return (
-    <AppBar position="sticky" color="default" elevation={1}>
-      <Container maxWidth="lg">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            component={RouterLink}
-            to="/"
-            sx={{
-              flexGrow: 1,
-              textDecoration: 'none',
-              color: 'inherit',
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-            }}
+    <>
+      {/* Top Contact Bar */}
+      <Box
+        sx={{
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          py: 1,
+          display: { xs: 'none', md: 'block' },
+        }}
+      >
+        <Container maxWidth="lg">
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={4}
+            sx={{ color: 'rgba(0, 0, 0, 0.7)' }}
           >
-            Becks Educational Consultancy
-          </Typography>
+            <Stack direction="row" spacing={3} alignItems="center">
+              <Stack direction="row" spacing={1} alignItems="center">
+                <PhoneIcon sx={{ fontSize: 16 }} />
+                <Typography variant="body2">+251 911 123 456</Typography>
+              </Stack>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <EmailIcon sx={{ fontSize: 16 }} />
+                <Typography variant="body2">info@becksconsultancy.com</Typography>
+              </Stack>
+            </Stack>
+            <Stack direction="row" spacing={3} alignItems="center">
+              <Stack direction="row" spacing={1} alignItems="center">
+                <LocationOnIcon sx={{ fontSize: 16 }} />
+                <Typography variant="body2">Addis Ababa, Ethiopia</Typography>
+              </Stack>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <AccessTimeIcon sx={{ fontSize: 16 }} />
+                <Typography variant="body2">Mon - Fri: 9:00 AM - 6:00 PM</Typography>
+              </Stack>
+            </Stack>
+          </Stack>
+        </Container>
+      </Box>
 
-          {isMobile ? (
-            <>
+      {/* Main Navigation */}
+      <AppBar position="sticky" sx={{ backgroundColor: '#0a1929', boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)' }}>
+        <Container maxWidth="lg">
+          <Toolbar disableGutters>
+            {/* Logo - Desktop */}
+            <Typography
+              variant="h6"
+              noWrap
+              component={RouterLink}
+              to="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontWeight: 700,
+                color: '#ffffff',
+                textDecoration: 'none',
+                fontSize: '1.5rem',
+              }}
+            >
+              BECKS
+            </Typography>
+
+            {/* Mobile Menu */}
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
+                size="large"
+                aria-label="menu"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                sx={{ color: '#ffffff' }}
               >
                 <MenuIcon />
               </IconButton>
-              <Drawer
-                variant="temporary"
-                anchor="right"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-                ModalProps={{
-                  keepMounted: true,
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                  '& .MuiPaper-root': {
+                    backgroundColor: '#0a1929',
+                    borderRadius: 2,
+                    mt: 1.5,
+                    minWidth: 200,
+                  },
                 }}
               >
-                {drawer}
-              </Drawer>
-            </>
-          ) : (
-            <Box sx={{ display: 'flex', gap: 2 }}>
-              {menuItems.map((item) => (
+                {pages.map((page) => (
+                  <MenuItem
+                    key={page.name}
+                    onClick={handleCloseNavMenu}
+                    component={RouterLink}
+                    to={page.path}
+                    sx={{
+                      py: 1.5,
+                      '&:hover': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      },
+                    }}
+                  >
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Box sx={{ color: '#1a237e' }}>{page.icon}</Box>
+                      <Typography
+                        textAlign="center"
+                        sx={{
+                          color: '#ffffff',
+                          fontWeight: 500,
+                        }}
+                      >
+                        {page.name}
+                      </Typography>
+                    </Stack>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+
+            {/* Logo - Mobile */}
+            <Typography
+              variant="h6"
+              noWrap
+              component={RouterLink}
+              to="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontWeight: 700,
+                color: '#ffffff',
+                textDecoration: 'none',
+                fontSize: '1.5rem',
+              }}
+            >
+              BECKS
+            </Typography>
+
+            {/* Desktop Menu */}
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+              {pages.map((page) => (
                 <Button
-                  key={item.text}
+                  key={page.name}
                   component={RouterLink}
-                  to={item.path}
-                  color="inherit"
+                  to={page.path}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    color: '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1,
+                    px: 2,
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                    },
+                  }}
                 >
-                  {item.text}
+                  <Box sx={{ color: '#1a237e' }}>{page.icon}</Box>
+                  {page.name}
                 </Button>
               ))}
             </Box>
-          )}
-        </Toolbar>
-      </Container>
-    </AppBar>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </>
   );
 };
 

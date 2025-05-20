@@ -11,9 +11,10 @@ import {
   Alert,
 } from '@mui/material';
 import { motion } from 'framer-motion';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const MotionBox = motion(Box);
 
@@ -21,216 +22,226 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    subject: '',
     message: '',
   });
-
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: '',
-    severity: 'success' as 'success' | 'error',
-  });
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' as 'success' | 'error' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Here you would typically handle the form submission
     setSnackbar({
       open: true,
       message: 'Thank you for your message. We will get back to you soon!',
       severity: 'success',
     });
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
-    });
+    setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
-  const handleCloseSnackbar = () => {
-    setSnackbar((prev) => ({ ...prev, open: false }));
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
   };
 
-  const contactInfo = [
-    {
-      icon: <EmailIcon sx={{ fontSize: 40, color: '#ffffff' }} />,
-      title: 'Email',
-      content: 'info@becksconsultancy.com',
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
     },
-    {
-      icon: <PhoneIcon sx={{ fontSize: 40, color: '#ffffff' }} />,
-      title: 'Phone',
-      content: '+1 (555) 123-4567',
-    },
-    {
-      icon: <LocationOnIcon sx={{ fontSize: 40, color: '#ffffff' }} />,
-      title: 'Address',
-      content: '123 Education Street, City, Country',
-    },
-  ];
+  };
 
   return (
-    <Box sx={{ backgroundColor: '#000000', minHeight: '100vh' }}>
-      {/* Hero Section */}
-      <Box
-        sx={{
-          backgroundColor: '#1a1a1a',
-          color: '#ffffff',
-          py: { xs: 6, md: 8 },
-          borderBottom: '1px solid #333',
-        }}
-      >
-        <Container maxWidth="lg">
-          <MotionBox
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+    <Box sx={{ backgroundColor: '#0a1929', minHeight: '100vh', pt: { xs: 8, md: 12 }, pb: { xs: 8, md: 12 } }}>
+      <Container maxWidth="lg">
+        <MotionBox
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          sx={{ textAlign: 'center', mb: { xs: 6, md: 8 } }}
+        >
+          <Typography
+            variant="h2"
+            component="h1"
+            gutterBottom
+            sx={{
+              color: '#ffffff',
+              fontWeight: 700,
+              fontSize: { xs: '2.5rem', md: '3.5rem' },
+              mb: 2,
+            }}
           >
-            <Typography variant="h2" component="h1" gutterBottom sx={{ fontWeight: 700 }}>
-              Contact Us
-            </Typography>
-            <Typography variant="h5" sx={{ color: '#cccccc' }}>
-              Get in touch with our team of experts
-            </Typography>
-          </MotionBox>
-        </Container>
-      </Box>
+            Get in Touch
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              color: 'rgba(255, 255, 255, 0.7)',
+              maxWidth: '800px',
+              mx: 'auto',
+              mb: 4,
+            }}
+          >
+            Have questions about studying abroad? We're here to help you achieve your educational goals.
+          </Typography>
+        </MotionBox>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '2fr 1fr' }, gap: 4 }}>
+        <MotionBox
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+            gap: 4,
+          }}
+        >
           {/* Contact Form */}
-          <MotionBox
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card sx={{ backgroundColor: '#1a1a1a', border: '1px solid #333' }}>
-              <CardContent sx={{ p: 4 }}>
-                <Typography variant="h4" gutterBottom sx={{ color: '#ffffff', fontWeight: 600, mb: 4 }}>
+          <MotionBox variants={itemVariants}>
+            <Card
+              sx={{
+                backgroundColor: '#ffffff',
+                borderRadius: 4,
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                overflow: 'hidden',
+                transition: 'transform 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-8px)',
+                },
+              }}
+            >
+              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+                <Typography variant="h5" sx={{ color: '#1a237e', fontWeight: 600, mb: 3 }}>
                   Send us a Message
                 </Typography>
                 <form onSubmit={handleSubmit}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  <Box sx={{ display: 'grid', gap: 3 }}>
                     <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 3 }}>
                       <TextField
-                        required
                         fullWidth
                         label="Name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
+                        required
                         sx={{
                           '& .MuiOutlinedInput-root': {
-                            color: '#ffffff',
+                            borderRadius: 2,
                             '& fieldset': {
-                              borderColor: '#333',
+                              borderColor: 'rgba(26, 35, 126, 0.2)',
                             },
                             '&:hover fieldset': {
-                              borderColor: '#ffffff',
+                              borderColor: '#1a237e',
                             },
                             '&.Mui-focused fieldset': {
-                              borderColor: '#ffffff',
+                              borderColor: '#1a237e',
                             },
                           },
                           '& .MuiInputLabel-root': {
-                            color: '#cccccc',
-                          },
-                          '& .MuiInputLabel-root.Mui-focused': {
-                            color: '#ffffff',
+                            color: 'rgba(26, 35, 126, 0.7)',
+                            '&.Mui-focused': {
+                              color: '#1a237e',
+                            },
                           },
                         }}
                       />
                       <TextField
-                        required
                         fullWidth
                         label="Email"
                         name="email"
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
+                        required
                         sx={{
                           '& .MuiOutlinedInput-root': {
-                            color: '#ffffff',
+                            borderRadius: 2,
                             '& fieldset': {
-                              borderColor: '#333',
+                              borderColor: 'rgba(26, 35, 126, 0.2)',
                             },
                             '&:hover fieldset': {
-                              borderColor: '#ffffff',
+                              borderColor: '#1a237e',
                             },
                             '&.Mui-focused fieldset': {
-                              borderColor: '#ffffff',
+                              borderColor: '#1a237e',
                             },
                           },
                           '& .MuiInputLabel-root': {
-                            color: '#cccccc',
-                          },
-                          '& .MuiInputLabel-root.Mui-focused': {
-                            color: '#ffffff',
+                            color: 'rgba(26, 35, 126, 0.7)',
+                            '&.Mui-focused': {
+                              color: '#1a237e',
+                            },
                           },
                         }}
                       />
                     </Box>
                     <TextField
                       fullWidth
-                      label="Phone"
-                      name="phone"
-                      value={formData.phone}
+                      label="Subject"
+                      name="subject"
+                      value={formData.subject}
                       onChange={handleChange}
+                      required
                       sx={{
                         '& .MuiOutlinedInput-root': {
-                          color: '#ffffff',
+                          borderRadius: 2,
                           '& fieldset': {
-                            borderColor: '#333',
+                            borderColor: 'rgba(26, 35, 126, 0.2)',
                           },
                           '&:hover fieldset': {
-                            borderColor: '#ffffff',
+                            borderColor: '#1a237e',
                           },
                           '&.Mui-focused fieldset': {
-                            borderColor: '#ffffff',
+                            borderColor: '#1a237e',
                           },
                         },
                         '& .MuiInputLabel-root': {
-                          color: '#cccccc',
-                        },
-                        '& .MuiInputLabel-root.Mui-focused': {
-                          color: '#ffffff',
+                          color: 'rgba(26, 35, 126, 0.7)',
+                          '&.Mui-focused': {
+                            color: '#1a237e',
+                          },
                         },
                       }}
                     />
                     <TextField
-                      required
                       fullWidth
                       label="Message"
                       name="message"
-                      multiline
-                      rows={4}
                       value={formData.message}
                       onChange={handleChange}
+                      required
+                      multiline
+                      rows={4}
                       sx={{
                         '& .MuiOutlinedInput-root': {
-                          color: '#ffffff',
+                          borderRadius: 2,
                           '& fieldset': {
-                            borderColor: '#333',
+                            borderColor: 'rgba(26, 35, 126, 0.2)',
                           },
                           '&:hover fieldset': {
-                            borderColor: '#ffffff',
+                            borderColor: '#1a237e',
                           },
                           '&.Mui-focused fieldset': {
-                            borderColor: '#ffffff',
+                            borderColor: '#1a237e',
                           },
                         },
                         '& .MuiInputLabel-root': {
-                          color: '#cccccc',
-                        },
-                        '& .MuiInputLabel-root.Mui-focused': {
-                          color: '#ffffff',
+                          color: 'rgba(26, 35, 126, 0.7)',
+                          '&.Mui-focused': {
+                            color: '#1a237e',
+                          },
                         },
                       }}
                     />
@@ -241,9 +252,15 @@ const Contact = () => {
                       sx={{
                         backgroundColor: '#1a237e',
                         color: '#ffffff',
+                        borderRadius: 2,
                         py: 1.5,
+                        textTransform: 'none',
+                        fontSize: '1.1rem',
+                        fontWeight: 600,
+                        boxShadow: '0 4px 12px rgba(26, 35, 126, 0.2)',
                         '&:hover': {
                           backgroundColor: '#0d47a1',
+                          boxShadow: '0 6px 16px rgba(26, 35, 126, 0.3)',
                         },
                       }}
                     >
@@ -256,56 +273,141 @@ const Contact = () => {
           </MotionBox>
 
           {/* Contact Information */}
-          <MotionBox
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card sx={{ backgroundColor: '#1a1a1a', border: '1px solid #333', height: '100%' }}>
-              <CardContent sx={{ p: 4 }}>
-                <Typography variant="h4" gutterBottom sx={{ color: '#ffffff', fontWeight: 600, mb: 4 }}>
+          <MotionBox variants={itemVariants}>
+            <Card
+              sx={{
+                backgroundColor: '#ffffff',
+                borderRadius: 4,
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'transform 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-8px)',
+                },
+              }}
+            >
+              <CardContent sx={{ p: { xs: 3, md: 4 }, height: '100%' }}>
+                <Typography variant="h5" sx={{ color: '#1a237e', fontWeight: 600, mb: 4 }}>
                   Contact Information
                 </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                  {contactInfo.map((info, index) => (
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Box
-                      key={index}
                       sx={{
+                        backgroundColor: 'rgba(26, 35, 126, 0.1)',
+                        borderRadius: '50%',
+                        p: 1.5,
                         display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: 2,
+                        alignItems: 'center',
+                        justifyContent: 'center',
                       }}
                     >
-                      <Box sx={{ color: '#ffffff' }}>
-                        {info.icon}
-                      </Box>
-                      <Box>
-                        <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 600, mb: 1 }}>
-                          {info.title}
-                        </Typography>
-                        <Typography variant="body1" sx={{ color: '#cccccc' }}>
-                          {info.content}
-                        </Typography>
-                      </Box>
+                      <LocationOnIcon sx={{ color: '#1a237e', fontSize: 28 }} />
                     </Box>
-                  ))}
+                    <Box>
+                      <Typography variant="subtitle1" sx={{ color: '#1a237e', fontWeight: 600 }}>
+                        Our Location
+                      </Typography>
+                      <Typography variant="body1" sx={{ color: '#333333' }}>
+                        123 Education Street, Addis Ababa, Ethiopia
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box
+                      sx={{
+                        backgroundColor: 'rgba(26, 35, 126, 0.1)',
+                        borderRadius: '50%',
+                        p: 1.5,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <PhoneIcon sx={{ color: '#1a237e', fontSize: 28 }} />
+                    </Box>
+                    <Box>
+                      <Typography variant="subtitle1" sx={{ color: '#1a237e', fontWeight: 600 }}>
+                        Phone Number
+                      </Typography>
+                      <Typography variant="body1" sx={{ color: '#333333' }}>
+                        +251 911 123 456
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box
+                      sx={{
+                        backgroundColor: 'rgba(26, 35, 126, 0.1)',
+                        borderRadius: '50%',
+                        p: 1.5,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <EmailIcon sx={{ color: '#1a237e', fontSize: 28 }} />
+                    </Box>
+                    <Box>
+                      <Typography variant="subtitle1" sx={{ color: '#1a237e', fontWeight: 600 }}>
+                        Email Address
+                      </Typography>
+                      <Typography variant="body1" sx={{ color: '#333333' }}>
+                        info@becksconsultancy.com
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box
+                      sx={{
+                        backgroundColor: 'rgba(26, 35, 126, 0.1)',
+                        borderRadius: '50%',
+                        p: 1.5,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <AccessTimeIcon sx={{ color: '#1a237e', fontSize: 28 }} />
+                    </Box>
+                    <Box>
+                      <Typography variant="subtitle1" sx={{ color: '#1a237e', fontWeight: 600 }}>
+                        Working Hours
+                      </Typography>
+                      <Typography variant="body1" sx={{ color: '#333333' }}>
+                        Monday - Friday: 9:00 AM - 6:00 PM
+                      </Typography>
+                    </Box>
+                  </Box>
                 </Box>
               </CardContent>
             </Card>
           </MotionBox>
-        </Box>
+        </MotionBox>
       </Container>
 
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert
-          onClose={handleCloseSnackbar}
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
           severity={snackbar.severity}
-          sx={{ width: '100%', backgroundColor: '#1a1a1a', color: '#ffffff' }}
+          sx={{
+            width: '100%',
+            backgroundColor: snackbar.severity === 'success' ? '#1a237e' : '#d32f2f',
+            color: '#ffffff',
+            '& .MuiAlert-icon': {
+              color: '#ffffff',
+            },
+          }}
         >
           {snackbar.message}
         </Alert>

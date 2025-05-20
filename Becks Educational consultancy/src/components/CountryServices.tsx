@@ -3,7 +3,6 @@ import {
   Box,
   Container,
   Typography,
-  Grid,
   Card,
   CardContent,
   CardMedia,
@@ -12,19 +11,9 @@ import {
   FormControl,
   InputLabel,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { motion } from 'framer-motion';
 
-const StyledCard = styled(Card)(({ theme }) => ({
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  transition: 'transform 0.3s ease-in-out',
-  backgroundColor: '#000000',
-  color: '#ffffff',
-  '&:hover': {
-    transform: 'translateY(-5px)',
-  },
-}));
+const MotionBox = motion(Box);
 
 const countries = [
   {
@@ -80,22 +69,22 @@ const countries = [
 const CountryServices: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0].id);
 
-  const handleCountryChange = (event: any) => {
-    setSelectedCountry(event.target.value);
+  const handleCountryChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setSelectedCountry(event.target.value as string);
   };
 
   const selectedCountryData = countries.find(country => country.id === selectedCountry);
 
   return (
-    <Box sx={{ py: 8, backgroundColor: '#000000' }}>
+    <Box sx={{ py: { xs: 6, md: 8 }, backgroundColor: '#0a1929' }}>
       <Container maxWidth="lg">
         <Typography
-          variant="h2"
+          variant="h3"
           component="h2"
           align="center"
           gutterBottom
           sx={{
-            fontWeight: 700,
+            fontWeight: 600,
             color: '#ffffff',
             mb: 6,
           }}
@@ -104,7 +93,9 @@ const CountryServices: React.FC = () => {
         </Typography>
 
         <FormControl fullWidth sx={{ mb: 4 }}>
-          <InputLabel id="country-select-label" sx={{ color: '#ffffff' }}>Select Country</InputLabel>
+          <InputLabel id="country-select-label" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+            Select Country
+          </InputLabel>
           <Select
             labelId="country-select-label"
             id="country-select"
@@ -114,7 +105,7 @@ const CountryServices: React.FC = () => {
             sx={{
               color: '#ffffff',
               '.MuiOutlinedInput-notchedOutline': {
-                borderColor: '#ffffff',
+                borderColor: 'rgba(255, 255, 255, 0.1)',
               },
               '&:hover .MuiOutlinedInput-notchedOutline': {
                 borderColor: '#ffffff',
@@ -128,7 +119,7 @@ const CountryServices: React.FC = () => {
             }}
           >
             {countries.map((country) => (
-              <MenuItem key={country.id} value={country.id} sx={{ color: '#000000' }}>
+              <MenuItem key={country.id} value={country.id} sx={{ color: '#333333' }}>
                 {country.name}
               </MenuItem>
             ))}
@@ -136,9 +127,25 @@ const CountryServices: React.FC = () => {
         </FormControl>
 
         {selectedCountryData && (
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={6}>
-              <StyledCard>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 4 }}>
+            <MotionBox
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  backgroundColor: '#ffffff',
+                  transition: 'all 0.3s ease-in-out',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 8px 16px rgba(26, 35, 126, 0.2)',
+                  },
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="300"
@@ -146,33 +153,53 @@ const CountryServices: React.FC = () => {
                   alt={selectedCountryData.name}
                   sx={{ objectFit: 'cover' }}
                 />
-                <CardContent>
-                  <Typography variant="h5" component="h3" gutterBottom sx={{ color: '#ffffff' }}>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h5" component="h3" gutterBottom sx={{ color: '#1a237e', fontWeight: 600 }}>
                     {selectedCountryData.name}
                   </Typography>
-                  <Typography variant="body1" sx={{ color: '#cccccc' }} paragraph>
+                  <Typography variant="body1" sx={{ color: '#333333' }} paragraph>
                     {selectedCountryData.description}
                   </Typography>
                 </CardContent>
-              </StyledCard>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box sx={{ p: 3, backgroundColor: '#1a1a1a', borderRadius: 2 }}>
-                <Typography variant="h6" gutterBottom sx={{ color: '#ffffff' }}>
+              </Card>
+            </MotionBox>
+
+            <MotionBox
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card
+                sx={{
+                  height: '100%',
+                  backgroundColor: '#ffffff',
+                  p: 4,
+                }}
+              >
+                <Typography variant="h6" gutterBottom sx={{ color: '#1a237e', fontWeight: 600, mb: 3 }}>
                   Our Services for {selectedCountryData.name}
                 </Typography>
-                <ul style={{ listStyleType: 'none', padding: 0 }}>
+                <Box component="ul" sx={{ pl: 2 }}>
                   {selectedCountryData.services.map((service, index) => (
-                    <li key={index} style={{ marginBottom: '1rem' }}>
-                      <Typography variant="body1" sx={{ color: '#cccccc' }}>
-                        • {service}
-                      </Typography>
-                    </li>
+                    <Typography
+                      component="li"
+                      variant="body1"
+                      key={index}
+                      sx={{ 
+                        mb: 2,
+                        color: '#333333',
+                        '&::marker': {
+                          color: '#1a237e',
+                        },
+                      }}
+                    >
+                      {service}
+                    </Typography>
                   ))}
-                </ul>
-              </Box>
-            </Grid>
-          </Grid>
+                </Box>
+              </Card>
+            </MotionBox>
+          </Box>
         )}
       </Container>
     </Box>

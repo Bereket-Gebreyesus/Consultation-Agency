@@ -1,114 +1,105 @@
-import React from 'react';
 import { Box, Container, Typography, Card, CardContent, CardMedia, Rating, Divider } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { motion } from 'framer-motion';
 
-const StyledCard = styled(Card)(() => ({
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  transition: 'transform 0.3s ease-in-out',
-  backgroundColor: '#000000',
-  color: '#ffffff',
-  border: '1px solid #333',
-  '&:hover': {
-    transform: 'translateY(-5px)',
-    boxShadow: '0 8px 16px rgba(255, 255, 255, 0.1)',
-  },
-}));
+const MotionBox = motion(Box);
 
-const testimonials = [
-  {
-    id: 1,
-    name: 'Sarah Johnson',
-    country: 'United States',
-    image: '/images/usa-visa.jpg',
-    rating: 5,
-    testimonial: 'Thanks to Becks Educational Consultancy, I successfully obtained my student visa for the USA. Their guidance throughout the process was invaluable.',
-    university: 'Harvard University',
-    program: 'Master of Business Administration',
-  },
-  {
-    id: 2,
-    name: 'Michael Chen',
-    country: 'Canada',
-    image: '/images/canada-visa.jpg',
-    rating: 5,
-    testimonial: 'The team at Becks made my dream of studying in Canada a reality. Their expertise in visa applications is unmatched.',
-    university: 'University of Toronto',
-    program: 'Computer Science',
-  },
-  {
-    id: 3,
-    name: 'Emma Wilson',
-    country: 'United Kingdom',
-    image: '/images/uk-visa.jpg',
-    rating: 5,
-    testimonial: 'I couldn\'t have asked for better support in my UK student visa application. Becks Educational Consultancy is truly professional.',
-    university: 'University of Oxford',
-    program: 'International Relations',
-  },
-];
+const Testimonials = () => {
+  const testimonials = [
+    {
+      id: 1,
+      name: 'Sarah Johnson',
+      country: 'Nigeria',
+      rating: 5,
+      university: 'University of Toronto',
+      program: 'Masters in Computer Science',
+      image: 'https://via.placeholder.com/150',
+      testimonial: 'Becks Educational Consultancy made my dream of studying in Canada a reality. Their guidance throughout the application process was invaluable.',
+    },
+    {
+      id: 2,
+      name: 'Michael Chen',
+      country: 'China',
+      rating: 5,
+      university: 'University of British Columbia',
+      program: 'Bachelor of Commerce',
+      image: 'https://via.placeholder.com/150',
+      testimonial: 'The team at Becks provided exceptional support with my university applications and visa process. Highly recommended!',
+    },
+    {
+      id: 3,
+      name: 'Aisha Patel',
+      country: 'India',
+      rating: 5,
+      university: 'McGill University',
+      program: 'PhD in Engineering',
+      image: 'https://via.placeholder.com/150',
+      testimonial: 'Thanks to Becks, I secured admission to my dream university with a full scholarship. Their expertise in educational consulting is unmatched.',
+    },
+  ];
 
-const Testimonials: React.FC = () => {
   return (
-    <Box sx={{ py: 8, backgroundColor: '#000000' }}>
+    <Box sx={{ backgroundColor: '#0a1929', py: { xs: 6, md: 8 } }}>
       <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          component="h2"
-          align="center"
-          gutterBottom
-          sx={{
-            fontWeight: 700,
-            color: '#ffffff',
-            mb: 6,
-          }}
-        >
+        <Typography variant="h3" textAlign="center" gutterBottom sx={{ color: '#ffffff', fontWeight: 600, mb: 6 }}>
           Success Stories
         </Typography>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 4 }}>
           {testimonials.map((testimonial) => (
-            <StyledCard key={testimonial.id}>
-              <CardMedia
-                component="img"
-                height="200"
-                image={testimonial.image}
-                alt={`${testimonial.name} - ${testimonial.country} Visa`}
-                sx={{ objectFit: 'cover' }}
-              />
-              <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="h6" component="h3" gutterBottom sx={{ color: '#ffffff' }}>
-                    {testimonial.name}
-                  </Typography>
-                  <Typography variant="subtitle1" sx={{ color: '#cccccc' }} gutterBottom>
-                    {testimonial.country}
-                  </Typography>
-                  <Rating value={testimonial.rating} readOnly sx={{ mb: 2, color: '#ffffff' }} />
-                </Box>
-                <Divider sx={{ my: 2, borderColor: '#333' }} />
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="subtitle2" sx={{ color: '#ffffff', fontWeight: 'bold' }}>
-                    University
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: '#cccccc' }}>
+            <MotionBox
+              key={testimonial.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  backgroundColor: '#ffffff',
+                  transition: 'all 0.3s ease-in-out',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 8px 16px rgba(26, 35, 126, 0.2)',
+                  },
+                }}
+              >
+                <CardContent sx={{ p: 4 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                    <CardMedia
+                      component="img"
+                      sx={{
+                        width: 80,
+                        height: 80,
+                        borderRadius: '50%',
+                        mr: 2,
+                      }}
+                      image={testimonial.image}
+                      alt={testimonial.name}
+                    />
+                    <Box>
+                      <Typography variant="h6" sx={{ color: '#1a237e', fontWeight: 600 }}>
+                        {testimonial.name}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: '#555555' }}>
+                        {testimonial.country}
+                      </Typography>
+                      <Rating value={testimonial.rating} readOnly size="small" sx={{ mt: 0.5 }} />
+                    </Box>
+                  </Box>
+                  <Divider sx={{ my: 2 }} />
+                  <Typography variant="subtitle1" sx={{ color: '#1a237e', fontWeight: 500, mb: 1 }}>
                     {testimonial.university}
                   </Typography>
-                </Box>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="subtitle2" sx={{ color: '#ffffff', fontWeight: 'bold' }}>
-                    Program
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: '#cccccc' }}>
+                  <Typography variant="body2" sx={{ color: '#555555', mb: 2 }}>
                     {testimonial.program}
                   </Typography>
-                </Box>
-                <Divider sx={{ my: 2, borderColor: '#333' }} />
-                <Typography variant="body1" sx={{ color: '#cccccc', fontStyle: 'italic' }}>
-                  "{testimonial.testimonial}"
-                </Typography>
-              </CardContent>
-            </StyledCard>
+                  <Typography variant="body1" sx={{ color: '#333333', fontStyle: 'italic' }}>
+                    "{testimonial.testimonial}"
+                  </Typography>
+                </CardContent>
+              </Card>
+            </MotionBox>
           ))}
         </Box>
       </Container>
