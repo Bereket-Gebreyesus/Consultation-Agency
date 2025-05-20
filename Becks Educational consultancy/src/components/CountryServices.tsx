@@ -70,8 +70,8 @@ const countries = [
 const CountryServices: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0].id);
 
-  const handleCountryChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSelectedCountry(event.target.value as string);
+  const handleCountryChange = (event: SelectChangeEvent) => {
+    setSelectedCountry(event.target.value);
   };
 
   const selectedCountryData = countries.find(country => country.id === selectedCountry);

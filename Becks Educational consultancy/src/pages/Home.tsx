@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Container,
   Typography,
   Button,
-  TextField,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -12,6 +11,7 @@ import {
   IconButton,
   Snackbar,
   Alert,
+  TextField
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
@@ -22,6 +22,9 @@ import SchoolIcon from '@mui/icons-material/School';
 import LanguageIcon from '@mui/icons-material/Language';
 import WorkIcon from '@mui/icons-material/Work';
 import PhoneIcon from '@mui/icons-material/Phone';
+import { useInView } from 'react-intersection-observer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const MotionBox = motion(Box);
 
