@@ -7,12 +7,12 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Sarah Johnson',
+      name: 'Sara',
       country: 'Nigeria',
       rating: 5,
       university: 'University of Toronto',
       program: 'Masters in Computer Science',
-      image: 'images/pexels-olly-774909.jpg',
+      image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/pexels-divinetechygirl-1181686.jpg?raw=true',
       testimonial: 'Becks Educational Consultancy made my dream of studying in Canada a reality. Their guidance throughout the application process was invaluable.',
     },
     {
@@ -22,7 +22,7 @@ const Testimonials = () => {
       rating: 5,
       university: 'University of British Columbia',
       program: 'Bachelor of Commerce',
-      image: 'images/pexels-stefanstefancik-91227.jpg',
+      image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/default-profile.jpg?raw=true',
       testimonial: 'The team at Becks provided exceptional support with my university applications and visa process. Highly recommended!',
     },
     {
@@ -31,8 +31,8 @@ const Testimonials = () => {
       country: 'India',
       rating: 5,
       university: 'McGill University',
+      image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/pexels-stefanstefancik-91227.jpg?raw=true',
       program: 'PhD in Engineering',
-      image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/default-profile.jpg?raw=true',
       testimonial: 'Thanks to Becks, I secured admission to my dream university with a full scholarship. Their expertise in educational consulting is unmatched.',
     },
   ];
