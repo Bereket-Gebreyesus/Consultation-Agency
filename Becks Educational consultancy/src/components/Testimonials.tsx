@@ -32,7 +32,7 @@ const Testimonials = () => {
       rating: 5,
       university: 'McGill University',
       program: 'PhD in Engineering',
-      image: 'images/default-profile.jpg',
+      image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/default-profile.jpg?raw=true',
       testimonial: 'Thanks to Becks, I secured admission to my dream university with a full scholarship. Their expertise in educational consulting is unmatched.',
     },
   ];

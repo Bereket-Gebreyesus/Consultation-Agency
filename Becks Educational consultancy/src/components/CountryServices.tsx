@@ -20,7 +20,7 @@ const countries = [
   {
     id: 'usa',
     name: 'United States',
-    image: '/images/usa.png',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/usa.png?raw=true',
     description: 'Top universities, diverse programs, and excellent research opportunities.',
     services: [
       'Student Visa (F-1) Application',
@@ -32,7 +32,7 @@ const countries = [
   {
     id: 'netherlands',
     name: 'Netherlands',
-    image: '/images/netherlands-flag-png-large.png',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/netherlands-flag-png-large.png?raw=true',
     description: 'World-renowned institutions with rich academic heritage.',
     services: [
       'Student Visa (Tier 4) Application',
@@ -44,7 +44,7 @@ const countries = [
   {
     id: 'Poland',
     name: 'Poland',
-    image: '/images/poland-flag-png-large.png',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/poland-flag-png-large.png?raw=true',
     description: 'High-quality education with post-study work opportunities.',
     services: [
       'Study Permit Application',
@@ -56,7 +56,7 @@ const countries = [
   {
     id: 'Romania',
     name: 'Romania',
-    image: '/images/romania-flag-png-large.png',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/romania-flag-png-large.png?raw=true',
     description: 'Innovative education system with great lifestyle.',
     services: [
       'Student Visa (Subclass 500) Application',
