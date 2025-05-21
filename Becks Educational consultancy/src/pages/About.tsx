@@ -34,41 +34,41 @@ const team = [
   {
     name: 'Sarah Johnson',
     position: 'Founder & CEO',
-    image: '/images/pexels-divinetechygirl-1181686.jpg',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/pexels-divinetechygirl-1181686.jpg?raw=true',
     bio: 'With over 15 years of experience in international education, Dr. Johnson leads our team with expertise.',
   },
   {
     name: 'Michael Chen',
     position: 'Head of Admissions',
-    image: '/images/default-profile.jpg',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/default-profile.jpg?raw=true',
     bio: 'Specializing in university admissions, Michael has helped hundreds of students secure spots at top institutions.',
   },
   {
     name: 'Patel',
     position: 'Student Success Manager',
-    image: '/images/pexels-justin-shaifer-501272-1222271.jpg',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/pexels-justin-shaifer-501272-1222271.jpg?raw=true',
     bio: 'Dedicated to ensuring student success, Aisha provides comprehensive support throughout the application process.',
   },
 ];
 
 const galleryImages = [
   {
-    image: '/images/pexels-10ar-2880979.jpg',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/pexels-10ar-2880979.jpg?raw=true',
     title: 'Student Success Stories',
     description: 'Our students achieving their dreams at top universities worldwide',
   },
   {
-    image: '/images/pexels-pixabay-221537.jpg',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/pexels-pixabay-221537.jpg?raw=true',
     title: 'Modern Office',
     description: 'State-of-the-art facilities for personalized counseling',
   },
   {
-    image: '/images/pexels-field-engineer-147254-442150.jpg',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/pexels-field-engineer-147254-442150.jpg?raw=true',
     title: 'Workshop Sessions',
     description: 'Regular workshops and seminars for student development',
   },
   {
-    image: '/images/pexels-rdne-7713351.jpg',
+    image: 'https://github.com/Bereket-Gebreyesus/Consultation-Agency/blob/main/Becks%20Educational%20consultancy/public/images/pexels-rdne-7713351.jpg?raw=true',
     title: 'Graduation Celebrations',
     description: 'Celebrating our students\' achievements and milestones',
   },
