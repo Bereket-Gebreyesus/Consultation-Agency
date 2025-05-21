@@ -17,16 +17,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import Testimonials from '../components/Testimonials';
 import CountryServices from '../components/CountryServices';
-//import { motion } from 'framer-motion';
-//import SchoolIcon from '@mui/icons-material/School';
-//import LanguageIcon from '@mui/icons-material/Language';
-//import WorkIcon from '@mui/icons-material/Work';
-//import PhoneIcon from '@mui/icons-material/Phone';
-//import { useInView } from 'react-intersection-observer';
-//import Navbar from '../components/Navbar';
-//import Footer from '../components/Footer';
-
-//const MotionBox = motion(Box);
 
 const Home: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -70,10 +60,25 @@ const Home: React.FC = () => {
           overflow: 'hidden',
         }}
       >
-        <video width="600" controls autoPlay muted loop>
+        {/* Video covers the whole hero section */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0,
+          }}
+        >
           <source src={`${import.meta.env.BASE_URL}videos/Oxford University drone view _ The University of Oxford drone footage (1).mp4`} type="video/mp4" />
         </video>
-        
+
         {/* Overlay */}
         <Box
           sx={{
@@ -83,12 +88,12 @@ const Home: React.FC = () => {
             right: 0,
             bottom: 0,
             background: 'linear-gradient(45deg, rgba(10, 25, 41, 0.9) 0%, rgba(26, 35, 126, 0.9) 100%)',
-            zIndex: 0,
+            zIndex: 1,
           }}
         />
 
         {/* Content */}
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
           <Typography
             variant="h1"
             component="h1"
@@ -379,4 +384,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home; 
+export default Home;
