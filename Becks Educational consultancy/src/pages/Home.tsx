@@ -70,18 +70,7 @@ const Home: React.FC = () => {
           overflow: 'hidden',
         }}
       >
-        <video
-          autoPlay
-          muted
-          loop
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: -1,
-          }}
-        >
+        <video width="600" controls autoPlay muted loop>
           <source src={`${import.meta.env.BASE_URL}videos/Oxford University drone view _ The University of Oxford drone footage (1).mp4`} type="video/mp4" />
         </video>
         
