@@ -82,7 +82,7 @@ const Home: React.FC = () => {
             zIndex: -1,
           }}
         >
-          <source src="/videos/education-background.mp4" type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}videos/Oxford University drone view _ The University of Oxford drone footage (1).mp4`} type="video/mp4" />
         </video>
         
         {/* Overlay */}
